@@ -1,0 +1,71 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 2rem;
+  padding: 10rem 0 0 10rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.newArg div {
+  display: flex;
+  font-size: inherit;
+}
+
+.newArg input {
+  width: 20rem;
+  padding: 0.2rem 0.5rem;
+  font-size: inherit;
+}
+
+.newArg select {
+  font-size: inherit;
+  padding: 0.5rem 1rem;
+}
+
+.newArg button {
+  font-size: 1.6rem;
+  padding: 0.2rem 1rem;
+}
+.newArg button:hover {
+  cursor: pointer;
+}
+
+.form {
+  margin-bottom: 2rem;
+  display: flex;
+  font-size: inherit;
+  gap: 2rem;
+}
+
+.form button {
+  padding: 0.2rem 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.form select {
+  font-size: inherit;
+  padding: 0.5rem 1rem;
+}
+.form button:hover {
+  cursor: pointer;
+}
+
+.result {
+  display: flex;
+  gap: 1rem;
+}
