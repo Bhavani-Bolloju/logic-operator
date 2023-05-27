@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setOption, resultHandler } from "./redux-store/logic-slice";
 
 function App() {
-  // const { result } = useSelector((state) => state.logic);
   const { option, argList, result, argId } = useSelector(
     (state) => state.logic
   );
@@ -13,7 +12,6 @@ function App() {
   const dispatch = useDispatch();
 
   const changeResultHandler = function (value) {
-    console.log(value);
     dispatch(resultHandler(value));
   };
 

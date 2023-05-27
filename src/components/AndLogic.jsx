@@ -18,27 +18,52 @@ function AndLogic({
   const [option2, setOption2] = useState("");
   const [result1, setResult1] = useState("");
   const [result2, setResult2] = useState("");
+  const [logicOperator, setLogicOperator] = useState(option);
   // console.log(option1, "op1");
+
+  const logic = logicOperator == "and" ? "&&" : "||";
+
+  // console.log(logic);
 
   useEffect(() => {
     if (option1 == "constant") {
       setResult1(false);
-      onResult(false && result2);
-      // console.log(false, result2, !!result2, "1", false && result2);
+      onResult(logicOperator === "and" ? false && result2 : false || result2);
     }
-  }, [option1]);
+
+    if (option1 == "argument") {
+      setResult1(argList[0].status);
+      onResult(
+        logicOperator == "and"
+          ? argList[0].status && result2
+          : argList[0].status || result2
+      );
+    }
+  }, [option1, logicOperator]);
+
   useEffect(() => {
     if (option2 == "constant") {
       setResult2(false);
-      onResult(result1 && false);
-      // console.log(!!result1, false, "2", result1 && false);
+      onResult(logicOperator === "and" ? result1 && false : result1 || false);
     }
-  }, [option2]);
 
-  // console.log(result1, "1");
-  // console.log(result2, "2");
+    if (option2 == "argument") {
+      setResult2(argList[0].status);
+      onResult(
+        logicOperator === "and"
+          ? result1 && argList[0].status
+          : result1 || argList[0].status
+      );
+    }
+  }, [option2, logicOperator]);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (logicOperator == "and") {
+      onResult(!!result1 && !!result2);
+    } else {
+      onResult(!!result1 || !!result2);
+    }
+  }, [logicOperator]);
 
   //options 1 and 2
   const option1Handler = function (value) {
@@ -53,49 +78,80 @@ function AndLogic({
     setOption1("");
     setResult1("");
 
-    // if (result2 != "") {
-    //   onResult(false);
-    // }
-    // onResult(false && result2);
-    // console.log(result1, result2, result2 !== "");
+    if (logicOperator == "and") {
+      if (result2 == "") {
+        onResult("");
+      }
+
+      if (result2 !== "") {
+        onResult(false);
+      }
+    }
+
+    if (logicOperator == "or") {
+      if (result2 == "") {
+        onResult("");
+      }
+
+      if (result2 !== "") {
+        onResult(result2);
+      }
+    }
   };
 
   const resetHandler2 = function () {
     setOption2("");
     setResult2("");
-    // onResult(result1 && false);
 
-    // if (result1 != "") {
-    //   onResult(false);
-    // }
-    // console.log(result1, result2, result1 !== "");
+    if (logicOperator == "and") {
+      if (result1 == "") {
+        onResult("");
+      }
+      if (result1 !== "") {
+        onResult(false);
+      }
+    }
+
+    if (logicOperator == "or") {
+      if (result1 == "") {
+        onResult("");
+      }
+      if (result1 !== "") {
+        onResult(result1);
+      }
+    }
   };
-
-  // console.log(result1, result2);
 
   //result
   const resultHandler1 = function (value) {
     const resultValue = value == "true" ? true : false;
     setResult1(resultValue);
 
-    onResult(resultValue && !!result2);
+    onResult(
+      logicOperator === "and"
+        ? resultValue && !!result2
+        : resultValue || !!result2
+    );
   };
 
   const resultHandler2 = function (value) {
     const resultValue = value == "true" ? true : false;
     setResult2(resultValue);
 
-    // console.log(!!result1, resultValue, "2result", !!result1 && resultValue);
-
-    onResult(!!result1 && resultValue);
+    onResult(
+      logicOperator === "and"
+        ? !!result1 && resultValue
+        : !!result1 || resultValue
+    );
   };
-
-  const [constant, setConstant] = useState(false);
 
   return (
     <div>
       <div>
-        <select name="" id="">
+        <select
+          defaultValue={logicOperator}
+          onChange={(e) => setLogicOperator(e.target.value)}
+        >
           <option value="and">and</option>
           <option value="or">or</option>
         </select>
@@ -108,7 +164,7 @@ function AndLogic({
         </button>
       </div>
 
-      <div>
+      <div className="logicOptions">
         <div>
           {option1 == "" && (
             <LogicOptions onSelect={option1Handler} onReset={resetHandler1} />
@@ -143,10 +199,46 @@ function AndLogic({
             />
           )}
         </div>
+        <button>+add op</button>
       </div>
-      <button>+add op</button>
     </div>
   );
 }
 
 export default AndLogic;
+
+// if (logicOperator === "and") {
+//   if (result2 != "") {
+//     onResult(false);
+//   }
+// }
+
+// if (logicOperator === "or") {
+//   console.log("when || and result2 is true ");
+//   if (result2 == true) {
+//     onResult(true);
+//   }
+// }
+
+//both and 1 and 2 are empty
+// if (result2 == "") {
+//   onResult("");
+// }
+
+//.....................................................
+
+// if (logicOperator === "and") {
+//   if (result1 !== "") {
+//     onResult(false);
+//   }
+// }
+
+// if (logicOperator === "or") {
+//   if (result2 == "true") {
+//     onResult(true);
+//   }
+// }
+
+// if (result1 == "") {
+//   onResult("");
+// }

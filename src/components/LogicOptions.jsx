@@ -5,7 +5,7 @@ import { resultHandler, setOption } from "../redux-store/logic-slice";
 function LogicOptions({ onSelect, onReset }) {
   const dispatch = useDispatch();
   return (
-    <div>
+    <div className="inputOptions">
       <select
         onChange={(e) => {
           onSelect(e.target.value);
