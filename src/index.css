@@ -46,7 +46,7 @@ body {
 }
 
 .form {
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   display: flex;
   font-size: inherit;
   gap: 2rem;

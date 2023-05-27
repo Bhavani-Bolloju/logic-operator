@@ -39,12 +39,13 @@ function App() {
       <NewArg />
       <Options
         option={option}
-        optionsHandler={optionsHandler}
+        onSelect={optionsHandler}
         onResult={changeResultHandler}
         onReset={resetHandler}
         argId={argId}
         argList={argList}
       />
+
       <div className="result">
         <span>result:</span>
         <span>{result == "" ? "undefined" : result}</span>

@@ -6,14 +6,7 @@ import Options from "./Options";
 import Constant from "./Constant";
 import Arguments from "./Arguments";
 
-function AndLogic({
-  option,
-  optionsHandler,
-  onResult,
-  onReset,
-  argId,
-  argList
-}) {
+function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
   const [result1, setResult1] = useState("");
@@ -145,6 +138,10 @@ function AndLogic({
     );
   };
 
+  const addOpHandler = function () {
+    console.log("add op");
+  };
+
   return (
     <div>
       <div>
@@ -165,41 +162,23 @@ function AndLogic({
       </div>
 
       <div className="logicOptions">
-        <div>
-          {option1 == "" && (
-            <LogicOptions onSelect={option1Handler} onReset={resetHandler1} />
-          )}
-          {option1 == "constant" && (
-            <Constant onSelect={resultHandler1} onReset={resetHandler1} />
-          )}
-          {option1 == "argument" && (
-            <Arguments
-              onReset={resetHandler1}
-              argList={argList}
-              argId={argId}
-              option={option1}
-              onResult={resultHandler1}
-            />
-          )}
-        </div>
-        <div>
-          {option2 == "" && (
-            <LogicOptions onSelect={option2Handler} onReset={resetHandler2} />
-          )}
-          {option2 == "constant" && (
-            <Constant onSelect={resultHandler2} onReset={resetHandler2} />
-          )}
-          {option2 == "argument" && (
-            <Arguments
-              onReset={resetHandler2}
-              argList={argList}
-              argId={argId}
-              option={option2}
-              onResult={resultHandler2}
-            />
-          )}
-        </div>
-        <button>+add op</button>
+        <Options
+          option={option1}
+          onSelect={option1Handler}
+          onResult={resultHandler1}
+          onReset={resetHandler1}
+          argList={argList}
+          argId={argId}
+        />
+        <Options
+          option={option2}
+          onSelect={option2Handler}
+          onResult={resultHandler2}
+          onReset={resetHandler2}
+          argList={argList}
+          argId={argId}
+        />
+        <button onClick={addOpHandler}>+add op</button>
       </div>
     </div>
   );

@@ -4,19 +4,10 @@ import Arguments from "./Arguments";
 import LogicOptions from "./LogicOptions";
 import Constant from "./Constant";
 
-function Options({
-  option,
-  optionsHandler,
-  onResult,
-  onReset,
-  argList,
-  argId
-}) {
+function Options({ option, onSelect, onResult, onReset, argList, argId }) {
   return (
     <div className="form">
-      {option == "" && (
-        <LogicOptions onSelect={optionsHandler} onReset={onReset} />
-      )}
+      {option == "" && <LogicOptions onSelect={onSelect} onReset={onReset} />}
       {option == "constant" && (
         <Constant onSelect={onResult} onReset={onReset} />
       )}
@@ -33,7 +24,7 @@ function Options({
         <AndLogic
           onReset={onReset}
           option={option}
-          optionsHandler={optionsHandler}
+          onSelect={onSelect}
           onResult={onResult}
           argId={argId}
           argList={argList}
