@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addArg, editArg } from "../redux-store/logic-slice";
-import { memo } from "react";
 import Argument from "./Argument";
 
 function NewArg() {
@@ -31,4 +30,4 @@ function NewArg() {
   );
 }
 
-export default memo(NewArg);
+export default NewArg;

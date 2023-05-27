@@ -206,39 +206,3 @@ function AndLogic({
 }
 
 export default AndLogic;
-
-// if (logicOperator === "and") {
-//   if (result2 != "") {
-//     onResult(false);
-//   }
-// }
-
-// if (logicOperator === "or") {
-//   console.log("when || and result2 is true ");
-//   if (result2 == true) {
-//     onResult(true);
-//   }
-// }
-
-//both and 1 and 2 are empty
-// if (result2 == "") {
-//   onResult("");
-// }
-
-//.....................................................
-
-// if (logicOperator === "and") {
-//   if (result1 !== "") {
-//     onResult(false);
-//   }
-// }
-
-// if (logicOperator === "or") {
-//   if (result2 == "true") {
-//     onResult(true);
-//   }
-// }
-
-// if (result1 == "") {
-//   onResult("");
-// }

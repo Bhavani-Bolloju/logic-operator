@@ -17,7 +17,6 @@ function Options({
       {option == "" && (
         <LogicOptions onSelect={optionsHandler} onReset={onReset} />
       )}
-      {/* option, result, reset */}
       {option == "constant" && (
         <Constant onSelect={onResult} onReset={onReset} />
       )}
@@ -30,17 +29,16 @@ function Options({
           onResult={onResult}
         />
       )}
-      {option == "and" ||
-        (option == "or" && (
-          <AndLogic
-            onReset={onReset}
-            option={option}
-            optionsHandler={optionsHandler}
-            onResult={onResult}
-            argId={argId}
-            argList={argList}
-          />
-        ))}
+      {(option == "and" || option == "or") && (
+        <AndLogic
+          onReset={onReset}
+          option={option}
+          optionsHandler={optionsHandler}
+          onResult={onResult}
+          argId={argId}
+          argList={argList}
+        />
+      )}
     </div>
   );
 }
