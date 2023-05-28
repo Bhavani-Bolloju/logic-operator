@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import LogicOptions from "./LogicOptions";
-import { useDispatch, useSelector } from "react-redux";
-import { resultHandler, setOption } from "../redux-store/logic-slice";
+
 import Options from "./Options";
-import Constant from "./Constant";
-import Arguments from "./Arguments";
 
 function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
   const [option1, setOption1] = useState("");
@@ -12,16 +8,11 @@ function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
   const [result1, setResult1] = useState("");
   const [result2, setResult2] = useState("");
   const [logicOperator, setLogicOperator] = useState(option);
-  // console.log(option1, "op1");
-
-  const logic = logicOperator == "and" ? "&&" : "||";
-
-  // console.log(logic);
 
   useEffect(() => {
     if (option1 == "constant") {
       setResult1(false);
-      onResult(logicOperator === "and" ? false && result2 : false || result2);
+      onResult(false);
     }
 
     if (option1 == "argument") {
@@ -32,29 +23,49 @@ function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
           : argList[0].status || result2
       );
     }
-  }, [option1, logicOperator]);
+  }, [option1]);
 
   useEffect(() => {
     if (option2 == "constant") {
       setResult2(false);
-      onResult(logicOperator === "and" ? result1 && false : result1 || false);
+      onResult(false);
     }
 
     if (option2 == "argument") {
       setResult2(argList[0].status);
+
       onResult(
         logicOperator === "and"
           ? result1 && argList[0].status
           : result1 || argList[0].status
       );
     }
-  }, [option2, logicOperator]);
+  }, [option2]);
 
+  //switching logic
   useEffect(() => {
     if (logicOperator == "and") {
-      onResult(!!result1 && !!result2);
-    } else {
-      onResult(!!result1 || !!result2);
+      if (
+        (result1 == "" && result2 != "") ||
+        (result1 != "" && result2 == "")
+      ) {
+        onResult(false);
+      }
+      if (result1 !== "" && result2 !== "") {
+        onResult(result1 && result2);
+      }
+    }
+
+    if (logicOperator == "or") {
+      if (result1 !== "" && result2 !== "") {
+        onResult(result1 || result2);
+      }
+      if (result1 != "" || result2 == "") {
+        onResult(result1);
+      }
+      if (result1 == "" || result2 != "") {
+        onResult(result2);
+      }
     }
   }, [logicOperator]);
 
@@ -119,7 +130,6 @@ function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
   const resultHandler1 = function (value) {
     const resultValue = value == "true" ? true : false;
     setResult1(resultValue);
-
     onResult(
       logicOperator === "and"
         ? resultValue && !!result2
@@ -130,7 +140,6 @@ function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
   const resultHandler2 = function (value) {
     const resultValue = value == "true" ? true : false;
     setResult2(resultValue);
-
     onResult(
       logicOperator === "and"
         ? !!result1 && resultValue
@@ -147,18 +156,17 @@ function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
       <div>
         <select
           defaultValue={logicOperator}
-          onChange={(e) => setLogicOperator(e.target.value)}
+          onChange={(e) => {
+            setLogicOperator(e.target.value);
+
+            // onResult()
+            console.log(e.target.value);
+          }}
         >
           <option value="and">and</option>
           <option value="or">or</option>
         </select>
-        <button
-          onClick={() => {
-            onReset();
-          }}
-        >
-          X
-        </button>
+        <button onClick={onReset}>X</button>
       </div>
 
       <div className="logicOptions">

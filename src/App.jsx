@@ -12,6 +12,7 @@ function App() {
   const dispatch = useDispatch();
 
   const changeResultHandler = function (value) {
+    // console.log(value);
     dispatch(resultHandler(value));
   };
 
@@ -45,7 +46,6 @@ function App() {
         argId={argId}
         argList={argList}
       />
-
       <div className="result">
         <span>result:</span>
         <span>{result == "" ? "undefined" : result}</span>
