@@ -46,7 +46,6 @@ body {
 }
 
 .form {
-  /* margin-bottom: 2rem; */
   display: flex;
   font-size: inherit;
   gap: 2rem;
@@ -69,9 +68,8 @@ body {
   display: flex;
   gap: 1rem;
 }
-
 .logicOptions {
-  margin-left: 1.2rem;
+  margin-left: 1rem;
 }
 
 .inputOptions {

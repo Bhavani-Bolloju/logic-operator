@@ -147,6 +147,8 @@ function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
     );
   };
 
+  console.log(result1, result2);
+
   const addOpHandler = function () {
     console.log("add op");
   };
@@ -158,9 +160,6 @@ function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
           defaultValue={logicOperator}
           onChange={(e) => {
             setLogicOperator(e.target.value);
-
-            // onResult()
-            console.log(e.target.value);
           }}
         >
           <option value="and">and</option>
@@ -186,7 +185,7 @@ function AndLogic({ option, onSelect, onResult, onReset, argId, argList }) {
           argList={argList}
           argId={argId}
         />
-        <button onClick={addOpHandler}>+add op</button>
+        <button onClick={() => console.log("op")}>+add op</button>
       </div>
     </div>
   );

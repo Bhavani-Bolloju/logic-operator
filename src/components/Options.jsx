@@ -3,6 +3,7 @@ import AndLogic from "./AndLogic";
 import Arguments from "./Arguments";
 import LogicOptions from "./LogicOptions";
 import Constant from "./Constant";
+import { useSelector } from "react-redux";
 
 function Options({ option, onSelect, onResult, onReset, argList, argId }) {
   return (
@@ -21,14 +22,16 @@ function Options({ option, onSelect, onResult, onReset, argList, argId }) {
         />
       )}
       {(option == "and" || option == "or") && (
-        <AndLogic
-          onReset={onReset}
-          option={option}
-          onSelect={onSelect}
-          onResult={onResult}
-          argId={argId}
-          argList={argList}
-        />
+        <div>
+          <AndLogic
+            onReset={onReset}
+            option={option}
+            onSelect={onSelect}
+            onResult={onResult}
+            argId={argId}
+            argList={argList}
+          />
+        </div>
       )}
     </div>
   );

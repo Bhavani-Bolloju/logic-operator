@@ -12,7 +12,6 @@ function App() {
   const dispatch = useDispatch();
 
   const changeResultHandler = function (value) {
-    // console.log(value);
     dispatch(resultHandler(value));
   };
 
@@ -34,6 +33,8 @@ function App() {
     dispatch(resultHandler(""));
     dispatch(setOption(""));
   };
+
+  console.log(option);
 
   return (
     <div className="options">
